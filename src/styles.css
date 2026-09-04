@@ -61,6 +61,17 @@
   --surface-2: oklch(0.23 0.008 260);
   --hairline: oklch(1 0 0 / 8%);
 
+  --cat-endpoint: oklch(0.78 0.16 60);
+  --cat-network: oklch(0.72 0.13 235);
+  --cat-iot: oklch(0.74 0.15 320);
+  --cat-secops: oklch(0.75 0.14 25);
+  --cat-suite: oklch(0.74 0.11 210);
+  --cat-risk: oklch(0.76 0.14 155);
+  --cat-access: oklch(0.72 0.14 290);
+  --cat-cloud: oklch(0.74 0.12 190);
+  --cat-intel: oklch(0.78 0.14 85);
+  --cat-appsec: oklch(0.74 0.15 135);
+
   --card: oklch(0.195 0.007 260);
   --card-foreground: oklch(0.95 0.005 260);
   --popover: oklch(0.21 0.008 260);
