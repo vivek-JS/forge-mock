@@ -11,6 +11,7 @@ import { ChaosTesting } from "@/components/lf/ChaosTesting";
 import { AttackScenario } from "@/components/lf/AttackScenario";
 import { Readiness } from "@/components/lf/Readiness";
 import { BeforeAfter, Collaboration, FomoStrip } from "@/components/lf/Sections";
+import { LiveTicker, RotatingStatement, UrgencyBanner } from "@/components/lf/Marquee";
 import { CommandPalette } from "@/components/lf/CommandPalette";
 import { IntegrationGraph } from "@/components/lf/IntegrationGraph";
 import { ButtonBase, Section, Underlined } from "@/components/lf/primitives";
