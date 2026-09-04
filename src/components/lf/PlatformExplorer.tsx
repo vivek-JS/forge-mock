@@ -92,7 +92,7 @@ export function PlatformExplorer() {
           <input
             value={q}
             onChange={(e) => setQ(e.target.value)}
-            placeholder="Search 300+ platforms…"
+            placeholder={`Search ${PLATFORMS.length} platforms…`}
             aria-label="Search platforms"
             className="w-full rounded-md border border-input bg-surface/70 py-2 pl-9 pr-3 font-mono text-[0.8rem] outline-none transition-colors placeholder:text-muted-foreground/60 hover:border-primary/40 focus:border-primary/60"
           />

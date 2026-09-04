@@ -1,3 +1,4 @@
+import { PLATFORMS } from "@/lib/logforge";
 import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useRef, useState } from "react";
@@ -120,13 +121,13 @@ export function Hero() {
             </Link>
             <a href="#platforms">
               <ButtonBase variant="outline" className="px-5 py-2.5">
-                Explore 300+ Integrations <ArrowRight className="size-3.5" />
+                Explore {PLATFORMS.length} Integrations <ArrowRight className="size-3.5" />
               </ButtonBase>
             </a>
           </motion.div>
 
           <div className="mt-10 grid grid-cols-2 gap-x-6 gap-y-4 border-t border-border pt-6 sm:grid-cols-4">
-            {["300+ Security Platforms", "Minutes to First Mock", "Realistic API Behaviour", "Production Readiness Testing"].map(
+            {[`${PLATFORMS.length} Security Platforms`, "Minutes to First Mock", "Realistic API Behaviour", "Production Readiness Testing"].map(
               (t, i) => (
                 <motion.div
                   key={t}
