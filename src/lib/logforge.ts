@@ -1,7 +1,17 @@
 // Demo/sample data for the Log Forge concept prototype.
 // Every number and vendor reference here is synthetic sample data.
 
-export type Category = "EDR" | "SIEM" | "SOAR" | "Identity" | "Cloud" | "Network";
+export type Category =
+  | "Endpoint"
+  | "Network"
+  | "IoT"
+  | "SecOps"
+  | "Platform Suite"
+  | "Risk & Compliance"
+  | "Access Management"
+  | "Cloud Security"
+  | "Threat Intel"
+  | "AppSec";
 
 export type Platform = {
   id: string;
@@ -12,26 +22,115 @@ export type Platform = {
   auth: string;
   mock: boolean;
   liveLab: boolean;
+  /** synthetic baseline requests-per-second used by the live grid */
+  baseRps: number;
 };
 
+const P = (
+  id: string,
+  name: string,
+  category: Category,
+  kind: string,
+  endpoints: number,
+  auth: string,
+  mock = true,
+  liveLab = false,
+): Platform => ({ id, name, kind, category, endpoints, auth, mock, liveLab, baseRps: 4 + (endpoints % 17) });
+
 export const PLATFORMS: Platform[] = [
-  { id: "crowdstrike", name: "CrowdStrike", kind: "EDR / XDR", category: "EDR", endpoints: 148, auth: "OAuth2 client credentials", mock: true, liveLab: true },
-  { id: "sentinel", name: "Microsoft Sentinel", kind: "SIEM", category: "SIEM", endpoints: 96, auth: "Entra ID / OAuth2", mock: true, liveLab: false },
-  { id: "splunk", name: "Splunk", kind: "SIEM / Observability", category: "SIEM", endpoints: 112, auth: "Bearer token", mock: true, liveLab: true },
-  { id: "paloalto", name: "Palo Alto Networks", kind: "Network Security", category: "Network", endpoints: 74, auth: "API key", mock: true, liveLab: false },
-  { id: "sentinelone", name: "SentinelOne", kind: "EDR / XDR", category: "EDR", endpoints: 88, auth: "API token", mock: true, liveLab: true },
-  { id: "okta", name: "Okta", kind: "Identity", category: "Identity", endpoints: 64, auth: "SSWS / OAuth2", mock: true, liveLab: false },
-  { id: "wiz", name: "Wiz", kind: "Cloud Security", category: "Cloud", endpoints: 52, auth: "OAuth2", mock: true, liveLab: false },
-  { id: "torq", name: "Torq", kind: "SOAR / Automation", category: "SOAR", endpoints: 38, auth: "API key", mock: true, liveLab: false },
-  { id: "defender", name: "Microsoft Defender", kind: "EDR / XDR", category: "EDR", endpoints: 121, auth: "Entra ID / OAuth2", mock: true, liveLab: true },
-  { id: "zscaler", name: "Zscaler", kind: "Network / SASE", category: "Network", endpoints: 58, auth: "API key + session", mock: true, liveLab: false },
-  { id: "qradar", name: "IBM QRadar", kind: "SIEM", category: "SIEM", endpoints: 83, auth: "SEC token", mock: true, liveLab: false },
-  { id: "entra", name: "Entra ID", kind: "Identity", category: "Identity", endpoints: 91, auth: "OAuth2", mock: true, liveLab: true },
-  { id: "xsoar", name: "Cortex XSOAR", kind: "SOAR", category: "SOAR", endpoints: 45, auth: "API key", mock: true, liveLab: false },
-  { id: "gcpscc", name: "Google Security Center", kind: "Cloud Security", category: "Cloud", endpoints: 40, auth: "Service account", mock: true, liveLab: false },
+  P("crowdstrike", "CrowdStrike", "Endpoint", "EDR / XDR", 148, "OAuth2 client credentials", true, true),
+  P("sentinelone", "SentinelOne", "Endpoint", "EDR / XDR", 88, "API token", true, true),
+  P("defender", "Microsoft Defender", "Endpoint", "EDR / XDR", 121, "Entra ID / OAuth2", true, true),
+  P("tanium", "Tanium", "Endpoint", "Endpoint Management", 67, "API token"),
+  P("trendmicro", "Trend Micro", "Endpoint", "Endpoint Protection", 59, "API key"),
+  P("cybereason", "Cybereason", "Endpoint", "EDR", 44, "Session auth"),
+
+  P("paloalto", "Palo Alto Networks", "Network", "NGFW / Platform", 74, "API key", true, true),
+  P("zscaler", "Zscaler", "Network", "SASE / Proxy", 58, "API key + session"),
+  P("fortinet", "Fortinet", "Network", "NGFW / Fabric", 91, "API token"),
+  P("cisco", "Cisco", "Network", "Network Security", 132, "OAuth2"),
+  P("f5", "F5 Networks", "Network", "App Delivery", 47, "Basic + token"),
+  P("aruba", "Aruba Networks", "Network", "NAC / Wireless", 39, "API key"),
+  P("extrahop", "ExtraHop", "Network", "NDR", 41, "API key"),
+  P("darktrace", "DarkTrace", "Network", "NDR / AI", 53, "API token"),
+  P("vectra", "Vectra", "Network", "NDR", 36, "API token"),
+
+  P("armis", "Armis", "IoT", "OT / IoT Visibility", 33, "API secret"),
+  P("cylus", "Cylus", "IoT", "Rail OT Security", 21, "API key"),
+  P("claroty", "Claroty", "IoT", "OT / ICS", 29, "API token"),
+
+  P("servicenow", "ServiceNow", "SecOps", "ITSM / SecOps", 118, "OAuth2", true, true),
+  P("torq", "Torq", "SecOps", "SOAR / Automation", 38, "API key"),
+  P("xsoar", "Cortex XSOAR", "SecOps", "SOAR", 45, "API key"),
+  P("devo", "Devo", "SecOps", "Log Analytics", 51, "Bearer token"),
+  P("mandiant", "Mandiant", "SecOps", "IR / Intel", 34, "API key"),
+
+  P("splunk", "Splunk", "Platform Suite", "SIEM / Observability", 112, "Bearer token", true, true),
+  P("sentinel", "Microsoft Sentinel", "Platform Suite", "SIEM", 96, "Entra ID / OAuth2", true, true),
+  P("qradar", "IBM QRadar", "Platform Suite", "SIEM", 83, "SEC token"),
+  P("exabeam", "Exabeam", "Platform Suite", "UEBA / SIEM", 62, "API token"),
+  P("logrhythm", "LogRhythm", "Platform Suite", "SIEM", 57, "API key"),
+  P("elastic", "Elastic Security", "Platform Suite", "SIEM / Search", 104, "API key", true, true),
+  P("trellix", "Trellix", "Platform Suite", "XDR", 71, "OAuth2"),
+  P("rapid7", "Rapid7", "Platform Suite", "VM / SIEM", 66, "API key"),
+  P("tenable", "Tenable", "Platform Suite", "Vulnerability Mgmt", 73, "Access + secret key"),
+  P("qualys", "Qualys", "Platform Suite", "Vulnerability Mgmt", 69, "Basic auth"),
+
+  P("attackiq", "AttackIQ", "Risk & Compliance", "Breach Simulation", 27, "API token"),
+  P("safebreach", "SafeBreach", "Risk & Compliance", "Breach Simulation", 24, "API key"),
+  P("jupiterone", "JupiterOne", "Risk & Compliance", "Asset Graph", 42, "API key"),
+  P("cycognito", "CyCognito", "Risk & Compliance", "EASM", 31, "API token"),
+
+  P("okta", "Okta", "Access Management", "Identity", 64, "SSWS / OAuth2", true, true),
+  P("entra", "Entra ID", "Access Management", "Identity", 91, "OAuth2", true, true),
+  P("auth0", "Auth0", "Access Management", "CIAM", 58, "OAuth2"),
+  P("beyondtrust", "BeyondTrust", "Access Management", "PAM", 43, "OAuth2"),
+  P("cyberark", "CyberArk", "Access Management", "PAM", 61, "API token"),
+  P("silverfort", "SilverFort", "Access Management", "MFA / ITDR", 26, "API key"),
+
+  P("wiz", "Wiz", "Cloud Security", "CNAPP", 52, "OAuth2", true, true),
+  P("orca", "Orca Security", "Cloud Security", "CNAPP", 46, "API token"),
+  P("lacework", "LaceWork", "Cloud Security", "CNAPP", 44, "API key + secret"),
+  P("gcpscc", "Google Security Center", "Cloud Security", "CSPM", 40, "Service account"),
+  P("zerofox", "Cloud Security" === "x" ? "ZeroFox" : "ZeroFox", "Cloud Security", "Digital Risk", 22, "API token"),
+
+  P("threatq", "ThreatQuotient", "Threat Intel", "TIP", 35, "OAuth2"),
+  P("anomali", "Anomali", "Threat Intel", "TIP", 32, "API key"),
+  P("flashpoint", "FlashPoint", "Threat Intel", "Intel Feed", 19, "API token"),
+  P("recordedfuture", "Recorded Future", "Threat Intel", "Intel Feed", 37, "API token"),
+
+  P("snyk", "Snyk", "AppSec", "SCA / SAST", 49, "API token", true, true),
+  P("hackerone", "HackerOne", "AppSec", "Bug Bounty", 23, "Basic auth"),
+  P("veracode", "Veracode", "AppSec", "SAST / DAST", 38, "HMAC"),
 ];
 
-export const CATEGORIES: Array<"All" | Category> = ["All", "EDR", "SIEM", "SOAR", "Identity", "Cloud", "Network"];
+export const CATEGORIES: Array<"All" | Category> = [
+  "All",
+  "Endpoint",
+  "Network",
+  "IoT",
+  "SecOps",
+  "Platform Suite",
+  "Risk & Compliance",
+  "Access Management",
+  "Cloud Security",
+  "Threat Intel",
+  "AppSec",
+];
+
+/** Category tint tokens defined in src/styles.css */
+export const CATEGORY_TINT: Record<Category, string> = {
+  Endpoint: "var(--cat-endpoint)",
+  Network: "var(--cat-network)",
+  IoT: "var(--cat-iot)",
+  SecOps: "var(--cat-secops)",
+  "Platform Suite": "var(--cat-suite)",
+  "Risk & Compliance": "var(--cat-risk)",
+  "Access Management": "var(--cat-access)",
+  "Cloud Security": "var(--cat-cloud)",
+  "Threat Intel": "var(--cat-intel)",
+  AppSec: "var(--cat-appsec)",
+};
 
 export type Fault = "none" | "429" | "500" | "latency" | "token";
 
