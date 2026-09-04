@@ -55,7 +55,7 @@ export function AttackScenario() {
                       "block size-2.5 rounded-full border",
                       active ? cn("border-current", toneOf(s.severity)) : "border-border",
                     )}
-                    style={active ? { background: "currentColor" } : undefined}
+                    style={{ background: active ? "currentColor" : "transparent" }}
                   />
                 </span>
                 <div className={cn("transition-opacity duration-300", active ? "opacity-100" : "opacity-40")}>

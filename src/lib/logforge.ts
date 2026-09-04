@@ -119,7 +119,8 @@ const ENDPOINTS: Array<[LogRow["method"], string]> = [
 
 let seq = 0;
 export function makeRow(chaos = false, now = new Date()): LogRow {
-  const [method, endpoint] = ENDPOINTS[Math.floor(Math.random() * ENDPOINTS.length)];
+  const pick = ENDPOINTS[Math.floor(Math.random() * ENDPOINTS.length)] ?? ENDPOINTS[0]!;
+  const [method, endpoint] = pick;
   const r = Math.random();
   let status = 200;
   if (chaos) {
