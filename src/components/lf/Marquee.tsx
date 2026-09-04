@@ -127,9 +127,10 @@ export function UrgencyBanner() {
         </div>
         <div className="grid grid-cols-3 gap-2">
           {[
-            { icon: Zap, label: "faults injected", value: 18420 },
-            { icon: TrendingUp, label: "envs created", value: 3271 },
-            { icon: Flame, label: "bugs caught pre-prod", value: 942 },
+            { icon: Zap, label: "fault types", value: 12 },
+            { icon: TrendingUp, label: "platforms in catalogue", value: PLATFORMS.length },
+            { icon: Flame, label: "minutes to first mock", value: 4 },
+
           ].map((s) => (
             <div key={s.label} className="rounded-md border border-border bg-surface-2/50 p-3">
               <s.icon className="size-3.5 text-primary" />
