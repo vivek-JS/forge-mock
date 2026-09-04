@@ -92,7 +92,7 @@ export const PLATFORMS: Platform[] = [
   P("orca", "Orca Security", "Cloud Security", "CNAPP", 46, "API token"),
   P("lacework", "LaceWork", "Cloud Security", "CNAPP", 44, "API key + secret"),
   P("gcpscc", "Google Security Center", "Cloud Security", "CSPM", 40, "Service account"),
-  P("zerofox", "Cloud Security" === "x" ? "ZeroFox" : "ZeroFox", "Cloud Security", "Digital Risk", 22, "API token"),
+  P("zerofox", "ZeroFox", "Cloud Security", "Digital Risk", 22, "API token"),
 
   P("threatq", "ThreatQuotient", "Threat Intel", "TIP", 35, "OAuth2"),
   P("anomali", "Anomali", "Threat Intel", "TIP", 32, "API key"),
