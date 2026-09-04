@@ -172,17 +172,12 @@
   &::after {
     content: "";
     position: absolute;
-    left: -0.05em;
-    right: -0.05em;
-    bottom: 0.03em;
-    height: 0.34em;
-    background: linear-gradient(
-      to right,
-      oklch(0.78 0.16 60 / 40%),
-      oklch(0.78 0.16 60 / 12%)
-    );
-    border-bottom: 2px solid var(--primary);
-    z-index: -1;
+    left: 0;
+    right: 0;
+    bottom: -0.06em;
+    height: 3px;
+    border-radius: 2px;
+    background: linear-gradient(to right, var(--primary), oklch(0.78 0.16 60 / 25%));
     transform-origin: left;
     animation: sweep-in 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 350ms both;
   }
