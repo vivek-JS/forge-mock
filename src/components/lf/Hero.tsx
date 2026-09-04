@@ -94,7 +94,7 @@ export function Hero() {
             transition={{ duration: 0.55, delay: 0.06, ease: [0.2, 0.8, 0.2, 1] }}
             className="mt-6 text-balance text-[2.35rem] font-semibold leading-[1.05] tracking-tight md:text-[3.4rem]"
           >
-            Build against security APIs you <Underlined>don't have access to</Underlined>.
+            Build against security APIs you <Underlined>don't have access to.</Underlined>
           </motion.h1>
 
           <motion.p

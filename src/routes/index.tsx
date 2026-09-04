@@ -126,7 +126,7 @@ function Landing() {
           eyebrow="10 · Production readiness"
           title={
             <>
-              Know when your integration is <Underlined>actually ready</Underlined>.
+              Know when your integration is <Underlined>actually ready.</Underlined>
             </>
           }
           lede="A single score backed by the tests that matter — auth, coverage, error handling, rate limits, performance, schema and resilience."
