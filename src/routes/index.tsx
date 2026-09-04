@@ -134,8 +134,23 @@ function Landing() {
           <Readiness />
         </Section>
 
-        <Section id="fomo" eyebrow="11 · Untested risk" title="Shipping is not the same as surviving.">
-          <FomoStrip />
+        <Section
+          id="fomo"
+          eyebrow="11 · Untested risk"
+          title={
+            <>
+              Shipping is not the same as{" "}
+              <RotatingStatement lines={["surviving.", "surviving 429s.", "surviving downtime.", "surviving 2am."]} />
+            </>
+          }
+        >
+          <UrgencyBanner />
+          <div className="mt-4">
+            <FomoStrip />
+          </div>
+          <div className="mt-4">
+            <LiveTicker />
+          </div>
         </Section>
 
         <Section id="before" eyebrow="12 · Before / after" title="Same integration. Different week.">
