@@ -264,6 +264,8 @@ export const FOMO = [
   "Your integration handles 200 responses. What happens at 429?",
   "Competent integrations work in the happy path. Production-ready integrations survive the unhappy path.",
   "12 minutes of simulation can expose failures that otherwise appear in production.",
+  "Your competitor already shipped the integration you are still waiting on credentials for.",
+  "The bug is already in your code. Simulation just decides who finds it first — you or your customer.",
 ];
 
 export function statusTone(status: number) {

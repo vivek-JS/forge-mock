@@ -11,14 +11,24 @@ export function FomoStrip() {
       {FOMO.map((f, i) => (
         <motion.div
           key={f}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.35, delay: i * 0.05 }}
-          className="group flex gap-3 rounded-md border border-border bg-surface/60 p-4 transition-colors hover:border-primary/40"
+          initial={{ opacity: 0, y: 16, rotateX: -6 }}
+          whileInView={{ opacity: 1, y: 0, rotateX: 0 }}
+          whileHover={{ y: -3 }}
+          viewport={{ once: true, margin: "-60px" }}
+          transition={{ duration: 0.45, delay: i * 0.07, ease: [0.2, 0.8, 0.2, 1] }}
+          className="group relative flex gap-3 overflow-hidden rounded-md border border-border bg-surface/60 p-4 transition-colors hover:border-primary/45"
         >
+          <motion.span
+            aria-hidden
+            className="pointer-events-none absolute inset-y-0 left-0 w-[2px] origin-top bg-primary/70"
+            initial={{ scaleY: 0 }}
+            whileInView={{ scaleY: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: 0.12 + i * 0.07 }}
+          />
+          <span className="pointer-events-none absolute -right-10 -top-10 size-24 rounded-full bg-primary/10 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100" />
           <span className="mt-0.5 font-mono text-[0.7rem] text-primary">{String(i + 1).padStart(2, "0")}</span>
-          <p className="text-[0.88rem] leading-relaxed text-foreground/85">{f}</p>
+          <p className="relative text-[0.88rem] leading-relaxed text-foreground/85">{f}</p>
         </motion.div>
       ))}
     </div>
